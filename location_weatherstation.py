@@ -30,7 +30,7 @@ def np_getDistance(A , B ):# 先緯度後經度
     return distance
 
 #資料庫連線
-engine2=create_engine('mysql+pymysql://datayoo:*@(!)@&#@192.168.1.101:3306/cwb?charset=utf8')
+engine2=create_engine('mysql+pymysql://admin:Pn123456@192.168.1.124:3306/cwb?charset=utf8')
 con2 = engine2.connect()
 
 
