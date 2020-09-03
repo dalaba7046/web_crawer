@@ -9,6 +9,26 @@ def currency_len(currency,today,con):
     data=con.execute(sql).fetchall()
     
     return data
+
+def conf(path):
+    config_path = str(Path(path)) + "\\config.ini"
+    # 從設定檔讀取Database相關參數
+    config = configparser.ConfigParser()
+    config.read(config_path, encoding="utf-8-sig")
+
+    # # 絕對路徑
+    config_path = str(Path("D:\\Oracle")) + "\\config.ini"
+    config = configparser.ConfigParser()
+    config.read(config_path, encoding="utf-8-sig")
+    price_db = config.get('section1', 'db')
+    log_db = config.get('section1', 'log_db')
+    user = config.get('section1', 'user')
+    pw = config.get('section1', 'pw')
+    ip = config.get('section1', 'ip')
+    port = config.get('section1','port')
+
+
+    return price_db,log_db,user,pw,ip,port
 def main():
     today=date.today().strftime("%Y-%m-%d")
     # FROMAT='%(asctime)s-%(levelname)s-> %(message)s'
@@ -17,24 +37,15 @@ def main():
     # logging.getLogger('').handlers=[]
     # logging.basicConfig(level=logging.DEBUG,filename=log_filename,format=FROMAT)
 
-    
-    config_path = str(Path("D:\\Oracle")) + "\\config.ini"
-    config = configparser.ConfigParser()
-    config.read(config_path, encoding="utf-8-sig")
-    price_db = config.get('section1', 'price_db')
-    log_db = config.get('section1', 'log_db')
-    user = config.get('section1', 'user')
-    pw = config.get('section1', 'pw')
-    ip = config.get('section1', 'ip')
-    port = config.get('section1','port')
-    log = config.get('section1','log_db')
+    config_path='D:\\Oracle'
+    conf(config_path)
     
     #資料庫連線:
     #價格資料表
-    engine = create_engine('mysql+pymysql://'+user+':'+pw+'@'+ip+':'+port+'/'+price_db)
+    engine = create_engine('mysql+pymysql://'+conf(config_path)[2]+':'+conf(config_path)[3]+'@'+conf(config_path)[4]+':'+conf(config_path)[5]+'/'+conf(config_path)[0])
     con = engine.connect()
     #爬蟲狀態資料表
-    engine2 = create_engine('mysql+pymysql://'+user+':'+pw+'@'+ip+':'+port+'/'+log_db+'?charset=utf8')
+    engine2 = create_engine('mysql+pymysql://'+conf(config_path)[2]+':'+conf(config_path)[3]+'@'+conf(config_path)[4]+':'+conf(config_path)[5]+'/'+conf(config_path)[1])
     con2 = engine2.connect()
         
     try:
