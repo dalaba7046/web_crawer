@@ -23,14 +23,12 @@ def main():
     config.read(config_path, encoding="utf-8-sig")
     price_db = config.get('section1', 'price_db')
     log_db = config.get('section1', 'log_db')
-    #price_table = config.get('section1', 'price_table')
-    log_table = config.get('section1', 'log_table')
     user = config.get('section1', 'user')
     pw = config.get('section1', 'pw')
     ip = config.get('section1', 'ip')
     port = config.get('section1','port')
     log = config.get('section1','log_db')
-    #log_table = config.get('section1','log_table')
+    
     #資料庫連線:
     #價格資料表
     engine = create_engine('mysql+pymysql://'+user+':'+pw+'@'+ip+':'+port+'/'+price_db)
