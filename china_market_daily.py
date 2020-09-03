@@ -154,18 +154,19 @@ def main():
 		config.read(config_path, encoding="utf-8-sig")
 		price_db = config.get('section1', 'price_db')
 		log_db = config.get('section1', 'log_db')
-		price_table = config.get('section1', 'price_table')
+		#price_table = config.get('section1', 'price_table')
 		log_table = config.get('section1', 'log_table')
 		user = config.get('section1', 'user')
 		pw = config.get('section1', 'pw')
 		ip = config.get('section1', 'ip')
 		port = config.get('section1','port')
+        log_db = config.get('section1','log_db')
         #資料庫連線:
         #價格資料表
         engine = create_engine('mysql+pymysql://'+user+':'+pw+'@'+ip+':'+port+'/'+price_db)
         con = engine.connect()
         #爬蟲狀態資料表
-        engine2 = create_engine(('mysql+pymysql://'+user+':'+pw+'@'+ip+':'+port+'/'+log+db+'?charset=utf8')
+        engine2 = create_engine('mysql+pymysql://'+user+':'+pw+'@'+ip+':'+port+'/'+log_db+'?charset=utf8')
         con2 = engine2.connect()
         
         #log記錄區
