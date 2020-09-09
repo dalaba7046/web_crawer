@@ -11,3 +11,6 @@ exchenge_rate.py -> 透過twder套件取得當下美金,日圓,人民幣的現�
 
 
 china_market_daily.py -> 跟最資料庫最後一天爬取大蒜網站白蒜價格及評論
+
+
+variety_right -> 品種權
